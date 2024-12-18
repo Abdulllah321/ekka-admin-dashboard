@@ -1,10 +1,14 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Layout from "../components/common/Layout";
 import EditSvg from "../assets/img/icons/edit.svg";
 import ThumbnailImage from "../assets/img/products/vender-upload-preview.jpg";
-import Images from "../assets/img/products/vender-upload-thumb-preview.jpg";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
-import { createProduct, Product } from "../slices/productSlice";
+import {
+  createProduct,
+  fetchProductById,
+  Product,
+  updateProduct,
+} from "../slices/productSlice";
 import axios from "axios";
 import { AppDispatch, RootState } from "../store";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,6 +16,8 @@ import { fetchMainCategories } from "../slices/categorySlice";
 import DynamicColorPicker from "../components/products/DynamicColorPicker";
 import DynamicImageUpload from "../components/products/DynamicImageUpload";
 import toast from "react-hot-toast";
+import { IMAGE_BASE_URL } from "../constants";
+import SubmitBtn from "../components/common/SubmitBtn";
 
 const ProductFormPage = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -29,11 +35,31 @@ const ProductFormPage = () => {
     mainCategoryId: "",
     subCategoryId: "",
     thumbnail: "",
+    slug: "",
   });
+
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const [isEdit, setIsEdit] = useState(false);
   const { mainCategories: categories } = useSelector(
     (state: RootState) => state.categories
   );
+  const { loading, error, productDetails } = useSelector(
+    (state: RootState) => state.products
+  );
+  const { id } = useParams();
+
+  useEffect(() => {
+    if (id) {
+      setIsEdit(true);
+      dispatch(fetchProductById(id));
+    }
+  }, [id]);
+
+  useEffect(() => {
+    if (id && productDetails) {
+      setFormData(productDetails);
+    }
+  }, [productDetails]);
 
   useEffect(() => {
     dispatch(fetchMainCategories());
@@ -49,7 +75,7 @@ const ProductFormPage = () => {
     }));
 
     if (errors[name]) {
-      setErrors((prev) => ({ ...prev, [name]: "" }));
+      toast.error(`Failed to update ${name}`);
     }
   };
 
@@ -92,6 +118,7 @@ const ProductFormPage = () => {
         }
       }
     } catch (err) {
+      setErrors({ [name]: "Failed to upload" });
       console.error("Upload error:", err);
     }
   };
@@ -102,14 +129,44 @@ const ProductFormPage = () => {
       toast.error("Please select a thumbnail image");
       return;
     }
-    await dispatch(createProduct(formData));
+    if (isEdit) {
+      await dispatch(updateProduct(formData));
+    } else {
+      await dispatch(createProduct(formData));
+    }
+    if (!error) {
+      if (isEdit) {
+        toast.success("Product updated successfully");
+      } else {
+        toast.success("Product created successfully");
+        setFormData({
+          name: "",
+          description: "",
+          price: 0,
+          discountPrice: 0,
+          stockQuantity: 0,
+          sizes: [],
+          colors: [],
+          imageUrls: [],
+          status: "active",
+          shortDesc: "",
+          mainCategoryId: "",
+          subCategoryId: "",
+          thumbnail: "",
+          slug: "",
+        });
+      }
+    } else {
+      if (isEdit) toast.error("Failed to update product");
+      else toast.error("Failed to create product");
+    }
   };
 
   return (
     <Layout>
       <div className="breadcrumb-wrapper d-flex align-items-center justify-content-between">
         <div>
-          <h1>Add Product</h1>
+          <h1>{isEdit ? "Edit Product" : "Add Product"}</h1>
           <p className="breadcrumbs">
             <span>
               <a href="index.html">Home</a>
@@ -131,7 +188,11 @@ const ProductFormPage = () => {
         <div className="col-12">
           <div className="card card-default">
             <div className="card-header card-header-border-bottom">
-              <h2>Add Product</h2>
+              <h2>
+                {isEdit
+                  ? "Edit Product " + productDetails?.name
+                  : "Add Product"}
+              </h2>
             </div>
             <div className="card-body">
               <div className="row ec-vendor-uploads">
@@ -159,7 +220,11 @@ const ProductFormPage = () => {
                           <div className="imagePreview ec-div-preview">
                             <img
                               className="ec-image-preview"
-                              src={ThumbnailImage}
+                              src={
+                                formData.thumbnail
+                                  ? IMAGE_BASE_URL + formData.thumbnail
+                                  : ThumbnailImage
+                              }
                               alt="edit"
                             />
                           </div>
@@ -187,6 +252,7 @@ const ProductFormPage = () => {
                           placeholder="Enter product name"
                           required
                           onChange={handleChange}
+                          value={formData.name}
                         />
                       </div>
                       <div className="col-md-6">
@@ -195,6 +261,7 @@ const ProductFormPage = () => {
                           name="categories"
                           id="Categories"
                           className="form-select"
+                          value={formData.subCategoryId}
                           onChange={(e) => {
                             const selectedOption =
                               e.target.options[e.target.selectedIndex];
@@ -241,6 +308,7 @@ const ProductFormPage = () => {
                             type="text"
                             placeholder="Enter slug"
                             onChange={handleChange}
+                            value={formData.slug}
                           />
                         </div>
                       </div>
@@ -254,6 +322,7 @@ const ProductFormPage = () => {
                           placeholder="Enter short description"
                           onChange={handleChange}
                           required
+                          value={formData.shortDesc}
                         />
                       </div>
                       <DynamicColorPicker
@@ -296,6 +365,7 @@ const ProductFormPage = () => {
                           name="price"
                           onChange={handleChange}
                           required
+                          value={formData.price}
                         />
                       </div>
                       <div className="col-md-6">
@@ -307,6 +377,7 @@ const ProductFormPage = () => {
                           name="stockQuantity"
                           onChange={handleChange}
                           required
+                          value={formData.stockQuantity}
                         />
                       </div>
                       <div className="col-md-12">
@@ -319,6 +390,7 @@ const ProductFormPage = () => {
                           placeholder="Enter full description"
                           onChange={handleChange}
                           required
+                          value={formData.description}
                         />
                       </div>
                       <div className="col-md-12">
@@ -335,7 +407,7 @@ const ProductFormPage = () => {
                           placeholder=""
                           onChange={handleChange}
                           data-role="tagsinput"
-                          required
+                          value={formData?.productTags?.join(", ")}
                         />
                       </div>
 
@@ -350,6 +422,8 @@ const ProductFormPage = () => {
                               id="discountPrice"
                               name="discountPrice"
                               onChange={handleChange}
+                              placeholder="Enter discount price"
+                              value={formData.discountPrice}
                             />
                           </div>
                           <div className="col-md-6">
@@ -359,8 +433,9 @@ const ProductFormPage = () => {
                               id="stockStatus"
                               className="form-control"
                               onChange={handleChange}
+                              value={formData.stockStatus}
                             >
-                              <option value="" disabled>
+                              <option value="" disabled selected>
                                 Please select Stock
                               </option>
                               <option value="inStock">In Stock</option>
@@ -378,6 +453,8 @@ const ProductFormPage = () => {
                               id="weight"
                               name="weight"
                               onChange={handleChange}
+                              placeholder="Enter weight"
+                              value={formData?.weight}
                             />
                           </div>
                           <div className="col-md-6">
@@ -388,14 +465,17 @@ const ProductFormPage = () => {
                               id="dimensions"
                               name="dimensions"
                               onChange={handleChange}
+                              placeholder="Enter dimensions"
+                              value={formData?.dimensions}
                             />
                           </div>
                         </div>
                       </div>
                       <div className="col-md-12">
-                        <button type="submit" className="btn btn-primary">
-                          Submit
-                        </button>
+                        <SubmitBtn
+                          loading={loading}
+                          btnText={isEdit ? "Update" : "Submit"}
+                        />
                       </div>
                     </form>
                   </div>

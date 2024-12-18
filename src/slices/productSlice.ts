@@ -20,6 +20,10 @@ export interface Product {
   mainCategoryId: string;
   subCategoryId: string;
   thumbnail: string;
+  slug: string;
+  weight?: string;
+  dimensions?: string;
+  productTags?: string[];
 }
 
 // Define Slice State

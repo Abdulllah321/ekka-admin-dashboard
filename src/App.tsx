@@ -61,6 +61,7 @@ function App() {
           <Route path="/category" element={<CategoryPage />} />
           <Route path="/sub-category" element={<SubCategoryPage />} />
           <Route path="/product-form" element={<ProductFormPage />} />
+          <Route path="/product-form/:id" element={<ProductFormPage />} />
         </Routes>
       </Suspense>{" "}
     </div>
