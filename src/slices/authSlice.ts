@@ -5,6 +5,7 @@ interface AuthState {
   isAuthenticated: boolean;
   loading: boolean;
   error: string | null;
+  checkError: string | null;
   user: {
     id: string | null;
     username: string | null;
@@ -16,6 +17,7 @@ const initialState: AuthState = {
   isAuthenticated: false,
   loading: false,
   error: null,
+  checkError:null,
   user: null,
   token: null,
 };
@@ -111,7 +113,7 @@ const authSlice = createSlice({
       // checkUser
       .addCase(checkUser.pending, (state) => {
         state.loading = true;
-        state.error = null;
+        state.checkError = null;
       })
       .addCase(checkUser.fulfilled, (state, action) => {
         state.isAuthenticated = true;
@@ -121,7 +123,7 @@ const authSlice = createSlice({
       .addCase(checkUser.rejected, (state, action) => {
         state.isAuthenticated = false;
         state.loading = false;
-        state.error = action.payload as string;
+        state.checkError = action.payload as string;
       });
   },
 });

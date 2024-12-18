@@ -1,9 +1,5 @@
 import React, { Suspense, useEffect } from "react";
-import {
-  Routes,
-  Route,
-  useNavigate,
-} from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "./store";
 import { checkUser } from "./slices/authSlice";
@@ -16,6 +12,7 @@ const LoginPage = React.lazy(() => import("./pages/LoginPage"));
 const CategoryPage = React.lazy(() => import("./pages/CategoryPage"));
 const SubCategoryPage = React.lazy(() => import("./pages/SubCategoryPage"));
 const ProductFormPage = React.lazy(() => import("./pages/ProductFormPage"));
+const ProductListPage = React.lazy(() => import("./pages/ProductListPage"));
 
 function App() {
   const dispatch: AppDispatch = useDispatch();
@@ -62,6 +59,7 @@ function App() {
           <Route path="/sub-category" element={<SubCategoryPage />} />
           <Route path="/product-form" element={<ProductFormPage />} />
           <Route path="/product-form/:id" element={<ProductFormPage />} />
+          <Route path="/product-list" element={<ProductListPage />} />
         </Routes>
       </Suspense>{" "}
     </div>
