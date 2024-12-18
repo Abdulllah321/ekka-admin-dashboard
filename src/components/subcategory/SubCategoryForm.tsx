@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   createSubCategory,
   fetchMainCategories,
-  updateMainCategory,
   updateSubCategory,
 } from "../../slices/categorySlice";
 import { generateSlug } from "../../constants";
