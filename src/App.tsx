@@ -1,5 +1,5 @@
 import React, { Suspense, useEffect } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "./store";
 import { checkUser } from "./slices/authSlice";
@@ -16,10 +16,10 @@ const ProductListPage = React.lazy(() => import("./pages/ProductListPage"));
 
 function App() {
   const dispatch: AppDispatch = useDispatch();
-  const { isAuthenticated, loading } = useSelector(
+  const {  loading } = useSelector(
     (state: RootState) => state.auth
   );
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(checkUser());
@@ -53,6 +53,7 @@ function App() {
     >
       <Suspense fallback={<Loader />}>
         <Routes>
+          <Route path="/" element={<HomePage />} />
           <Route path="/dashboard" element={<ProductListPage />} />
           <Route path="/auth/admin/login" element={<LoginPage />} />
           <Route path="/category" element={<CategoryPage />} />
