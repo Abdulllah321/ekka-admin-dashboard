@@ -42,7 +42,7 @@ function App() {
   axios.defaults.withCredentials = true;
   axios.defaults.baseURL = import.meta.env.VITE_SERVER_URL;
 
-  if (!loading && !isAuthenticated) navigate("/auth/admin/login");
+  // if (!loading && !isAuthenticated) navigate("/auth/admin/login");
 
   return (
     <div
@@ -53,7 +53,7 @@ function App() {
     >
       <Suspense fallback={<Loader />}>
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/dashboard" element={<ProductListPage />} />
           <Route path="/auth/admin/login" element={<LoginPage />} />
           <Route path="/category" element={<CategoryPage />} />
           <Route path="/sub-category" element={<SubCategoryPage />} />
