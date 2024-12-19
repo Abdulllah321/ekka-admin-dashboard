@@ -2,7 +2,7 @@ import React from "react";
 
 interface NoDataFoundProps {
   title: string;
-  message: string;
+  message?: string;
   buttonText?: string; // Make buttonText optional
   buttonLink?: string; // Make buttonLink optional
   iconClass?: string; // Optional icon class
@@ -25,7 +25,7 @@ const NoDataFound: React.FC<NoDataFoundProps> = ({
                 <i className={`${iconClass} me-2`}></i>
                 {title}
               </h5>
-              <p className="card-text">{message}</p>
+              {message && <p className="card-text">{message}</p>}
               {buttonText && buttonLink && (
                 <a href={buttonLink} className="btn btn-primary">
                   {buttonText}

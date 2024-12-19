@@ -14,6 +14,7 @@ import { AnimatePresence } from "framer-motion"; // Import Framer Motion
 import CategoryInfoModel from "./CategoryInfoModel";
 import Modal from "../common/Modal";
 import Form from "./CategoryForm";
+import DataTable from "../../constants/dataTablesUtils";
 
 const CategoryDetails = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -28,6 +29,7 @@ const CategoryDetails = () => {
   useEffect(() => {
     dispatch(fetchMainCategories());
   }, [dispatch]);
+
 
   if (error) toast.error(error);
 
@@ -85,7 +87,7 @@ const CategoryDetails = () => {
       <div className="ec-cat-list card card-default">
         <div className="card-body">
           <div className="table-responsive">
-            <table id="responsive-data-table" className="table">
+            <DataTable className="table">
               <thead>
                 <tr>
                   <th>S. no</th>
@@ -170,7 +172,7 @@ const CategoryDetails = () => {
                   </tr>
                 ))}
               </tbody>
-            </table>
+            </DataTable>
           </div>
         </div>
       </div>

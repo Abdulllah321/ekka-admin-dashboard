@@ -1,5 +1,5 @@
 import React, { Suspense, useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "./store";
 import { checkUser } from "./slices/authSlice";
@@ -13,13 +13,15 @@ const CategoryPage = React.lazy(() => import("./pages/CategoryPage"));
 const SubCategoryPage = React.lazy(() => import("./pages/SubCategoryPage"));
 const ProductFormPage = React.lazy(() => import("./pages/ProductFormPage"));
 const ProductListPage = React.lazy(() => import("./pages/ProductListPage"));
+const ProductGridPage = React.lazy(() => import("./pages/ProductGridPage"));
+const ProductDetailPage = React.lazy(() => import("./pages/ProductDetailPage"));
 
 function App() {
   const dispatch: AppDispatch = useDispatch();
-  const {  loading } = useSelector(
+  const { isAuthenticated, loading } = useSelector(
     (state: RootState) => state.auth
   );
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(checkUser());
@@ -42,7 +44,7 @@ function App() {
   axios.defaults.withCredentials = true;
   axios.defaults.baseURL = import.meta.env.VITE_SERVER_URL;
 
-  // if (!loading && !isAuthenticated) navigate("/auth/admin/login");
+  if (!loading && !isAuthenticated) navigate("/auth/admin/login");
 
   return (
     <div
@@ -54,13 +56,14 @@ function App() {
       <Suspense fallback={<Loader />}>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/dashboard" element={<ProductListPage />} />
           <Route path="/auth/admin/login" element={<LoginPage />} />
           <Route path="/category" element={<CategoryPage />} />
           <Route path="/sub-category" element={<SubCategoryPage />} />
           <Route path="/product-form" element={<ProductFormPage />} />
           <Route path="/product-form/:id" element={<ProductFormPage />} />
           <Route path="/product-list" element={<ProductListPage />} />
+          <Route path="/product-grid" element={<ProductGridPage />} />
+          <Route path="/product-detail/:id" element={<ProductDetailPage />} />
         </Routes>
       </Suspense>{" "}
     </div>

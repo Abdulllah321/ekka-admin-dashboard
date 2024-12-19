@@ -14,8 +14,8 @@ export interface Product {
   colors: string[];
   imageUrls: string[];
   status: string;
-  createdAt?: string;
-  updatedAt?: string;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
   stockStatus?: "inStock" | "outOfStock" | "limitedStock";
   mainCategoryId: string;
   subCategoryId: string;
@@ -24,6 +24,7 @@ export interface Product {
   weight?: string;
   dimensions?: string;
   productTags?: string[];
+  soldQuantity?: number | 0;
 }
 
 // Define Slice State

@@ -14,6 +14,7 @@ import Modal from "../common/Modal";
 import Form from "./SubCategoryForm";
 import { IMAGE_BASE_URL } from "../../constants";
 import NoImageFound from "../../assets/img/not-image.png";
+import DataTable from "../../constants/dataTablesUtils";
 
 const CategoryDetails = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -82,7 +83,7 @@ const CategoryDetails = () => {
       <div className="ec-cat-list card card-default">
         <div className="card-body">
           <div className="table-responsive">
-            <table id="responsive-data-table" className="table">
+            <DataTable className="table">
               <thead>
                 <tr>
                   <th>Serial No</th>
@@ -160,7 +161,7 @@ const CategoryDetails = () => {
                   </tr>
                 ))}
               </tbody>
-            </table>
+            </DataTable>
           </div>
         </div>
       </div>

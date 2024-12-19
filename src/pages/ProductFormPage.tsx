@@ -65,19 +65,32 @@ const ProductFormPage = () => {
     dispatch(fetchMainCategories());
   }, []);
 
-  const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+ const handleChange = (
+   e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+ ) => {
+   const { name, value } = e.target;
 
-    if (errors[name]) {
-      toast.error(`Failed to update ${name}`);
-    }
-  };
+   // Handle conversion from comma-separated string to an array of tags
+   if (name === "productTags") {
+     setFormData((prev) => ({
+       ...prev,
+       [name]: value
+         .split(",")
+         .map((tag) => tag.trim())
+         .filter((tag) => tag !== ""),
+     }));
+   } else {
+     setFormData((prev) => ({
+       ...prev,
+       [name]: value,
+     }));
+   }
+
+   if (errors[name]) {
+     toast.error(`Failed to update ${name}`);
+   }
+ };
+
 
   const handleFileChange = (
     e: ChangeEvent<HTMLInputElement>,
@@ -407,7 +420,7 @@ const ProductFormPage = () => {
                           placeholder=""
                           onChange={handleChange}
                           data-role="tagsinput"
-                          value={formData?.productTags?.join(", ")}
+                          value={formData?.productTags?.join(", ") || ""} // Join array into a string for display
                         />
                       </div>
 

@@ -12079,8 +12079,8 @@ textarea.form-control-lg {
 
 .single-product-cover {
   overflow: hidden;
-  cursor: -webkit-zoom-in;
-  cursor: zoom-in;
+  /* cursor: -webkit-zoom-in; */
+  /* cursor: zoom-in; */
   border-radius: 15px;
 }
 .single-product-cover .slick-slide img {
