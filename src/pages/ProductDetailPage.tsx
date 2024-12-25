@@ -6,12 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import Loader from "../components/common/Loader";
 import { fetchProductById } from "../slices/productSlice";
-import { IMAGE_BASE_URL } from "../constants";
 import NoDataFound from "../components/common/NoDataFound";
 import "../assets/plugins/jquery-zoom/jquery.zoom.min.js";
-import Image from "../assets/img/products/pd_1.jpg";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -23,12 +19,6 @@ const ProductDetailPage = () => {
   const { productDetails, loading, error } = useSelector(
     (state: RootState) => state.products
   );
-  const [activeIndex, setActiveIndex] = useState(0); // Track active index of the main slider
-  const [swiperInstance, setSwiperInstance] = useState<any>(null);
-  useEffect(() => {
-    // Sync the active thumbnail with the main slider
-    setActiveIndex(0); // Set initial active index
-  }, [productDetails]);
 
   useEffect(() => {
     dispatch(fetchProductById(id!));
@@ -58,17 +48,6 @@ const ProductDetailPage = () => {
       </Layout>
     );
 
-  const handleSlideChange = (swiper: any) => {
-    // Adjust for looped slides to get the correct active index
-    const index = swiper.realIndex; // realIndex gives the correct index in loop mode
-    setActiveIndex(index);
-  };
-
-  const handleThumbnailClick = (index: number) => {
-    if (swiperInstance) {
-      swiperInstance.slideTo(index); // Jump to the clicked thumbnail's corresponding slide
-    }
-  };
   return (
     <Layout>
       <div className="breadcrumb-wrapper d-flex align-items-center justify-content-between">

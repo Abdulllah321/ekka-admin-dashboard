@@ -66,9 +66,19 @@ const Sidebar = ({ isSidebarVisible }: { isSidebarVisible: boolean }) => {
       path: "/review-list",
     },
     {
+      label: "Banners",
+      icon: "mdi mdi-billboard", 
+      path: "/banners",
+    },
+    {
       label: "Brands",
       icon: "mdi mdi-tag-faces",
       path: "/brand-list",
+    },
+    {
+      label: "Coupons",
+      icon: "mdi mdi-ticket-percent",
+      path: "/coupons",
     },
   ];
 

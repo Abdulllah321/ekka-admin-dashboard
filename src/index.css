@@ -1,11 +1,177 @@
-.magnify-container {
-  position: relative;
-  overflow: hidden;
+/*-------------------------------------------------
+  Banner Section CSS
+---------------------------------------------------*/
+.ec-banner {
+  margin-bottom: 3px;
 }
 
-.magnify-glass {
-  background-repeat: no-repeat;
-  background-size: 200%;
-  opacity: 0.7;
-  mix-blend-mode: lighten;
+.ec-banner-inner {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.banner-block {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  overflow: hidden;
+}
+.banner-block .bnr-overlay {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-radius: 0;
+  overflow: hidden;
+  border: 1px solid #eeeeee;
+}
+.banner-block img {
+  width: 100%;
+  -webkit-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+}
+.banner-block .banner-text {
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 30px;
+}
+.banner-block .banner-text .ec-banner-title {
+  font-size: 28px;
+  color: #555;
+  margin-bottom: 2px;
+  letter-spacing: 1px;
+  font-family: "Montserrat";
+  font-weight: 800;
+  position: relative;
+  padding-top: 0;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+.banner-block .banner-text .ec-banner-discount {
+  font-size: 24px;
+  font-weight: 400;
+  color: #ffffff;
+  letter-spacing: 0.7px;
+  line-height: 1;
+}
+.banner-block .banner-text .ec-banner-stitle {
+  font-size: 20px;
+  font-weight: 400;
+  color: #555;
+  text-transform: capitalize;
+  letter-spacing: 0.7px;
+  line-height: 1;
+  position: relative;
+  padding-left: 2px;
+  padding-top: 10px;
+}
+.banner-block .banner-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  width: 100%;
+  height: 100%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-transform: scale(0.9);
+          transform: scale(0.9);
+  opacity: 0;
+  -webkit-transition: all 0.5s ease 0s;
+  transition: all 0.5s ease 0s;
+  background-color: rgba(31, 28, 28, 0.5);
+}
+.banner-block .banner-content .ec-banner-btn a {
+  height: 40px;
+  font-size: 16px;
+  text-transform: uppercase;
+  padding: 0 18px;
+  letter-spacing: 0.02rem;
+  background-color: #3474d4;
+  color: #ffffff;
+  line-height: 40px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-weight: 600;
+}
+.banner-block .banner-content .ec-banner-btn a:hover {
+  background-color: #555;
+}
+.banner-block:hover .banner-content {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  opacity: 1;
+}
+
+.ec-banner-block-1 .banner-block .banner-text {
+  padding-top: 46px;
+}
+.ec-banner-block-1 .banner-block .banner-text .ec-banner-discount {
+  font-family: "Fjalla One";
+}
+
+.ec-banner-block-2 .banner-block .banner-text .ec-banner-title {
+  font-size: 28px;
+  margin: 15px 0;
+}
+.ec-banner-block-2 .banner-block .banner-text .ec-banner-discount {
+  font-size: 16px;
+  color: #777;
+  letter-spacing: 0.5px;
+  line-height: 1.5;
+}
+
+.ec-banner-block.ec-banner-block-2 {
+  padding: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-line-pack: justify;
+      align-content: space-between;
+  height: 100%;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }

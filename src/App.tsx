@@ -11,10 +11,12 @@ const HomePage = React.lazy(() => import("./pages/HomePage"));
 const LoginPage = React.lazy(() => import("./pages/LoginPage"));
 const CategoryPage = React.lazy(() => import("./pages/CategoryPage"));
 const SubCategoryPage = React.lazy(() => import("./pages/SubCategoryPage"));
+const BannerPage = React.lazy(() => import("./pages/BannerPage"));
 const ProductFormPage = React.lazy(() => import("./pages/ProductFormPage"));
 const ProductListPage = React.lazy(() => import("./pages/ProductListPage"));
 const ProductGridPage = React.lazy(() => import("./pages/ProductGridPage"));
 const ProductDetailPage = React.lazy(() => import("./pages/ProductDetailPage"));
+const CouponsPage = React.lazy(() => import("./pages/CouponsPage"));
 
 function App() {
   const dispatch: AppDispatch = useDispatch();
@@ -59,11 +61,13 @@ function App() {
           <Route path="/auth/admin/login" element={<LoginPage />} />
           <Route path="/category" element={<CategoryPage />} />
           <Route path="/sub-category" element={<SubCategoryPage />} />
+          <Route path="/banners" element={<BannerPage />} />
           <Route path="/product-form" element={<ProductFormPage />} />
           <Route path="/product-form/:id" element={<ProductFormPage />} />
           <Route path="/product-list" element={<ProductListPage />} />
           <Route path="/product-grid" element={<ProductGridPage />} />
           <Route path="/product-detail/:id" element={<ProductDetailPage />} />
+          <Route path="/coupons" element={<CouponsPage />} />
         </Routes>
       </Suspense>{" "}
     </div>

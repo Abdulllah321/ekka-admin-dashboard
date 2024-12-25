@@ -36,6 +36,7 @@ const ProductFormPage = () => {
     subCategoryId: "",
     thumbnail: "",
     slug: "",
+    discountPercentage: 0,
   });
 
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
@@ -65,32 +66,31 @@ const ProductFormPage = () => {
     dispatch(fetchMainCategories());
   }, []);
 
- const handleChange = (
-   e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
- ) => {
-   const { name, value } = e.target;
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
 
-   // Handle conversion from comma-separated string to an array of tags
-   if (name === "productTags") {
-     setFormData((prev) => ({
-       ...prev,
-       [name]: value
-         .split(",")
-         .map((tag) => tag.trim())
-         .filter((tag) => tag !== ""),
-     }));
-   } else {
-     setFormData((prev) => ({
-       ...prev,
-       [name]: value,
-     }));
-   }
+    // Handle conversion from comma-separated string to an array of tags
+    if (name === "productTags") {
+      setFormData((prev) => ({
+        ...prev,
+        [name]: value
+          .split(",")
+          .map((tag) => tag.trim())
+          .filter((tag) => tag !== ""),
+      }));
+    } else {
+      setFormData((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    }
 
-   if (errors[name]) {
-     toast.error(`Failed to update ${name}`);
-   }
- };
-
+    if (errors[name]) {
+      toast.error(`Failed to update ${name}`);
+    }
+  };
 
   const handleFileChange = (
     e: ChangeEvent<HTMLInputElement>,
@@ -142,36 +142,45 @@ const ProductFormPage = () => {
       toast.error("Please select a thumbnail image");
       return;
     }
-    if (isEdit) {
-      await dispatch(updateProduct(formData));
-    } else {
-      await dispatch(createProduct(formData));
-    }
-    if (!error) {
+    try {
+      let response;
       if (isEdit) {
-        toast.success("Product updated successfully");
+        response = await dispatch(updateProduct(formData));
       } else {
-        toast.success("Product created successfully");
-        setFormData({
-          name: "",
-          description: "",
-          price: 0,
-          discountPrice: 0,
-          stockQuantity: 0,
-          sizes: [],
-          colors: [],
-          imageUrls: [],
-          status: "active",
-          shortDesc: "",
-          mainCategoryId: "",
-          subCategoryId: "",
-          thumbnail: "",
-          slug: "",
-        });
+        response = await dispatch(createProduct(formData));
       }
-    } else {
-      if (isEdit) toast.error("Failed to update product");
-      else toast.error("Failed to create product");
+      if (response.meta.requestStatus === "fulfilled") {
+        if (isEdit) {
+          toast.success("Product updated successfully");
+        } else {
+          toast.success("Product created successfully");
+          setFormData({
+            name: "",
+            description: "",
+            price: 0,
+            discountPrice: 0,
+            stockQuantity: 0,
+            sizes: [],
+            colors: [],
+            imageUrls: [],
+            status: "active",
+            shortDesc: "",
+            mainCategoryId: "",
+            subCategoryId: "",
+            thumbnail: "",
+            slug: "",
+            discountPercentage: 0,
+          });
+        }
+      } else {
+        throw new Error("Server error");
+      }
+    } catch (error) {
+      if (isEdit) {
+        toast.error("Failed to update product");
+      } else {
+        toast.error("Failed to create product");
+      }
     }
   };
 
@@ -428,19 +437,21 @@ const ProductFormPage = () => {
                       <div className="card-body">
                         <div className="row">
                           <div className="col-md-6">
-                            <label className="form-label">Discount Price</label>
+                            <label className="form-label">
+                              Discount Percentage
+                            </label>
                             <input
                               type="number"
                               className="form-control"
-                              id="discountPrice"
-                              name="discountPrice"
+                              id="discountPercentage"
+                              name="discountPercentage"
                               onChange={handleChange}
-                              placeholder="Enter discount price"
-                              value={formData.discountPrice}
+                              placeholder="Enter discount percentage"
+                              value={formData.discountPercentage}
                             />
                           </div>
                           <div className="col-md-6">
-                            <label className="form-label">Discount Price</label>
+                            <label className="form-label">Stock Status</label>
                             <select
                               name="stockStatus"
                               id="stockStatus"

@@ -6,6 +6,8 @@ import {
   subCategoryReducer,
 } from "./slices/categorySlice";
 import productReducer from "./slices/productSlice";
+import bannersReducer from "./slices/bannerSlice";
+import couponsReducer from "./slices/couponSlice";
 
 export const store = configureStore({
   reducer: {
@@ -13,6 +15,8 @@ export const store = configureStore({
     categories: mainCategoryReducer,
     subCategories: subCategoryReducer,
     products: productReducer,
+    banners: bannersReducer,
+    coupons: couponsReducer,
   },
 });
 

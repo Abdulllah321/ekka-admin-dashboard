@@ -25,6 +25,7 @@ export interface Product {
   dimensions?: string;
   productTags?: string[];
   soldQuantity?: number | 0;
+  discountPercentage?: number;
 }
 
 // Define Slice State
@@ -42,7 +43,6 @@ const initialState: ProductState = {
   error: null,
 };
 
-// Async Thunks for CRUD Operations
 
 // Fetch All Products
 export const fetchProducts = createAsyncThunk<
