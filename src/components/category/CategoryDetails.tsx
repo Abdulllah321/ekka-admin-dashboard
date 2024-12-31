@@ -8,13 +8,13 @@ import {
 import Loader from "../common/Loader";
 import toast from "react-hot-toast";
 import NoDataFound from "../common/NoDataFound";
-import { IMAGE_BASE_URL } from "../../constants";
 import NoImageFound from "../../assets/img/not-image.png";
 import { AnimatePresence } from "framer-motion"; // Import Framer Motion
 import CategoryInfoModel from "./CategoryInfoModel";
 import Modal from "../common/Modal";
 import Form from "./CategoryForm";
 import DataTable from "../../constants/dataTablesUtils";
+import { getImageUrl } from "../../constants";
 
 const CategoryDetails = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -29,7 +29,6 @@ const CategoryDetails = () => {
   useEffect(() => {
     dispatch(fetchMainCategories());
   }, [dispatch]);
-
 
   if (error) toast.error(error);
 
@@ -106,7 +105,7 @@ const CategoryDetails = () => {
                     <td>
                       <img
                         className="cat-thumb"
-                        src={IMAGE_BASE_URL + category.imageUrl || NoImageFound}
+                        src={getImageUrl(category.imageUrl!) || NoImageFound}
                         alt="Category Image"
                       />
                     </td>

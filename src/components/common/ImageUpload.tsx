@@ -1,7 +1,7 @@
 import React, { ChangeEvent, DragEvent } from "react";
 import axios from "axios";
 import Loader from "./Loader";
-import { IMAGE_BASE_URL } from "../../constants";
+import { getImageUrl } from "../../constants";
 
 interface ImageUploadProps {
   onSuccess: (filePath: string) => void;
@@ -81,7 +81,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
         {value ? (
           <div className="image-preview position-relative">
             <img
-              src={IMAGE_BASE_URL + value}
+              src={getImageUrl(value!)}
               alt="Uploaded"
               style={{
                 height: "100px",

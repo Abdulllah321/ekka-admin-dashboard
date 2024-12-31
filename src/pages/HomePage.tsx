@@ -1,8 +1,7 @@
+import Layout from "../components/common/Layout";
 
 const HomePage = () => {
-  return (
-    <div>HomePage</div>
-  )
-}
+  return <Layout>HomePage</Layout>;
+};
 
-export default HomePage
+export default HomePage;

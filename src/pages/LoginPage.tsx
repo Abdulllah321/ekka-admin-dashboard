@@ -5,7 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap CSS
 import "../assets/css/ekka.css"; // Import your custom CSS (ensure the file is in the correct path)
 import { loginUser } from "../slices/authSlice";
 import { AppDispatch } from "../store";
-import { Navigate } from "react-router";
+import { Navigate, useNavigate } from "react-router";
 
 // Define the types for the Redux state
 interface RootState {
@@ -20,18 +20,20 @@ const LoginPage: React.FC = () => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const dispatch: AppDispatch = useDispatch();
-
+  const navigate = useNavigate();
   const { loading, error, isAuthenticated } = useSelector(
     (state: RootState) => state.auth
   );
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    dispatch(loginUser({ username, password }));
+
+    await dispatch(loginUser({ username, password })).unwrap();
+    navigate("/");
   };
 
   if (isAuthenticated) {
-    return <Navigate to="/dashboard" />;
+    return <Navigate to="/" />;
   }
 
   return (

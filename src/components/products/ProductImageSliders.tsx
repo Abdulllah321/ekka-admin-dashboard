@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Swiper as SwiperInstance } from "swiper";
 import ReactImageMagnify from "react-image-magnify";
-import { IMAGE_BASE_URL } from "../../constants";
 import { Navigation } from "swiper/modules";
+import { getImageUrl } from "../../constants";
 
 // Define types for the product details
 interface ProductDetails {
@@ -54,10 +54,10 @@ const ProductImageSliders: React.FC<ProductImageSlidersProps> = ({
               smallImage: {
                 alt: productDetails.name,
                 isFluidWidth: true,
-                src: IMAGE_BASE_URL + productDetails?.thumbnail,
+                src: getImageUrl(productDetails?.thumbnail!),
               },
               largeImage: {
-                src: IMAGE_BASE_URL + productDetails?.thumbnail,
+                src: getImageUrl(productDetails?.thumbnail!),
                 width: 1200,
                 height: 1800,
               },
@@ -76,10 +76,10 @@ const ProductImageSliders: React.FC<ProductImageSlidersProps> = ({
                 smallImage: {
                   alt: productDetails.name,
                   isFluidWidth: true,
-                  src: IMAGE_BASE_URL + img,
+                  src: getImageUrl(img),
                 },
                 largeImage: {
-                  src: IMAGE_BASE_URL + img,
+                  src: getImageUrl(img),
                   width: 1200,
                   height: 1800,
                 },
@@ -128,7 +128,7 @@ const ProductImageSliders: React.FC<ProductImageSlidersProps> = ({
                   : "3px solid transparent",
               transition: ".5s all",
             }}
-            src={IMAGE_BASE_URL + productDetails?.thumbnail}
+            src={getImageUrl( productDetails?.thumbnail!)}
             alt={productDetails.name}
           />
         </SwiperSlide>
@@ -157,7 +157,7 @@ const ProductImageSliders: React.FC<ProductImageSlidersProps> = ({
                     : "3px solid transparent",
                 transition: ".5s all",
               }}
-              src={IMAGE_BASE_URL + img}
+              src={getImageUrl(img)}
               alt={productDetails.name}
             />
           </SwiperSlide>

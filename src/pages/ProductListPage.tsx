@@ -7,10 +7,10 @@ import DataTable from "../constants/dataTablesUtils";
 import Loader from "../components/common/Loader";
 import NoDataFound from "../components/common/NoDataFound";
 import toast from "react-hot-toast";
-import { IMAGE_BASE_URL } from "../constants";
 import { Link } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import Modal from "../components/common/Modal";
+import { getImageUrl } from "../constants";
 
 const ProductListPage = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -106,7 +106,7 @@ const ProductListPage = () => {
                         <td>
                           <img
                             className="tbl-thumb"
-                            src={IMAGE_BASE_URL + product.thumbnail}
+                            src={getImageUrl(product.thumbnail)}
                             alt="Product Image"
                           />
                         </td>
@@ -127,7 +127,7 @@ const ProductListPage = () => {
                         <td>
                           <div className="btn-group mb-1">
                             <Link
-                              to={`/product-detail/${product?.id}`}
+                              to={`/product-detail/${product?.slug}`}
                               className="btn btn-outline-success"
                             >
                               Info
@@ -145,7 +145,7 @@ const ProductListPage = () => {
                             <div className="dropdown-menu">
                               <Link
                                 className="dropdown-item"
-                                to={`/product-form/${product?.id}`}
+                                to={`/product-form/${product?.slug}`}
                               >
                                 Edit
                               </Link>

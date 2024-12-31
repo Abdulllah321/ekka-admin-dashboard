@@ -1,6 +1,6 @@
 import {motion} from "framer-motion"
-import { IMAGE_BASE_URL } from "../../constants";
 import NoImageFound from "../../assets/img/not-image.png";
+import { getImageUrl } from "../../constants";
 
 type Props = {
   selectedCategory: any;
@@ -43,7 +43,7 @@ const CategoryInfoModel = ({ selectedCategory ,closeModal} : Props) => {
               <div className="col-md-4">
                 <img
                   src={
-                    IMAGE_BASE_URL + selectedCategory.imageUrl || NoImageFound
+                    getImageUrl(selectedCategory.imageUrl!) || NoImageFound
                   }
                   alt={selectedCategory.name}
                   className="img-fluid"

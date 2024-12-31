@@ -10,7 +10,6 @@ import {
   updateBanner,
 } from "../slices/bannerSlice";
 import Loader from "../components/common/Loader";
-import { IMAGE_BASE_URL } from "../constants";
 import { AnimatePresence, motion } from "framer-motion";
 import Modal from "../components/common/Modal";
 import ImageUpload from "../components/common/ImageUpload";
@@ -18,6 +17,7 @@ import { Link } from "react-router";
 import EditSvg from "../assets/img/icons/edit.svg";
 import { FaTrash } from "react-icons/fa";
 import toast from "react-hot-toast";
+import { getImageUrl } from "../constants";
 
 const BannerPage = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -145,7 +145,7 @@ const BannerPage = () => {
                       >
                         <div className="bnr-overlay">
                           <img
-                            src={IMAGE_BASE_URL + banner.image}
+                            src={getImageUrl(banner.image!)}
                             alt={banner.title}
                           />
                           <div className="banner-text">

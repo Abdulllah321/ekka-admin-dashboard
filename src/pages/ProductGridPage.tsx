@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../store";
@@ -7,10 +7,10 @@ import Layout from "../components/common/Layout";
 import Loader from "../components/common/Loader";
 import NoDataFound from "../components/common/NoDataFound";
 import toast from "react-hot-toast";
-import { IMAGE_BASE_URL } from "../constants";
 import Image from "../assets/img/products/p1.jpg";
 import { AnimatePresence } from "framer-motion";
 import Modal from "../components/common/Modal";
+import { getImageUrl } from "../constants";
 
 const ProductGridPage = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -131,7 +131,7 @@ const ProductGridPage = () => {
                     <div className="card-top">
                       <img
                         className="card-image"
-                        src={IMAGE_BASE_URL + product.thumbnail || Image}
+                        src={getImageUrl(product.thumbnail) || Image}
                         alt={product.name}
                       />
                     </div>
@@ -147,14 +147,14 @@ const ProductGridPage = () => {
                     <div className="card-action">
                       <div
                         className="card-edit"
-                        onClick={() => navigate(`/product-form/${product.id}`)}
+                        onClick={() => navigate(`/product-form/${product.slug}`)}
                       >
                         <i className="mdi mdi-circle-edit-outline" />
                       </div>
                       <div
                         className="card-preview"
                         onClick={() =>
-                          navigate(`/product-detail/${product.id}`)
+                          navigate(`/product-detail/${product.slug}`)
                         }
                       >
                         <i className="mdi mdi-eye-outline" />

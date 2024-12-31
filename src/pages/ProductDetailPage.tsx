@@ -5,15 +5,16 @@ import { AppDispatch, RootState } from "../store";
 import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import Loader from "../components/common/Loader";
-import { fetchProductById } from "../slices/productSlice";
+import { fetchProductBySlug } from "../slices/productSlice";
 import NoDataFound from "../components/common/NoDataFound";
 import "../assets/plugins/jquery-zoom/jquery.zoom.min.js";
 
 import "swiper/css";
 import "swiper/css/navigation";
 import ProductImageSliders from "../components/products/ProductImageSliders.js";
+
 const ProductDetailPage = () => {
-  const { id } = useParams();
+  const { id: slug } = useParams();
   const dispatch: AppDispatch = useDispatch();
 
   const { productDetails, loading, error } = useSelector(
@@ -21,7 +22,7 @@ const ProductDetailPage = () => {
   );
 
   useEffect(() => {
-    dispatch(fetchProductById(id!));
+    dispatch(fetchProductBySlug(slug!));
   }, [dispatch]);
 
   if (error) toast.error(error);
@@ -64,7 +65,7 @@ const ProductDetailPage = () => {
           </p>
         </div>
         <div>
-          <Link to={"/product-form/" + id} className="btn btn-primary">
+          <Link to={"/product-form/" + slug} className="btn btn-primary">
             {" "}
             Edit
           </Link>

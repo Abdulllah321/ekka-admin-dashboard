@@ -12,9 +12,9 @@ import { AnimatePresence } from "framer-motion"; // Import Framer Motion
 import CategoryInfoModel from "./SubCategoryInfoModel";
 import Modal from "../common/Modal";
 import Form from "./SubCategoryForm";
-import { IMAGE_BASE_URL } from "../../constants";
 import NoImageFound from "../../assets/img/not-image.png";
 import DataTable from "../../constants/dataTablesUtils";
+import { getImageUrl } from "../../constants";
 
 const CategoryDetails = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -102,7 +102,7 @@ const CategoryDetails = () => {
                     <td>
                       <img
                         className="cat-thumb"
-                        src={IMAGE_BASE_URL + category.imageUrl || NoImageFound}
+                        src={getImageUrl(category.imageUrl!) || NoImageFound}
                         alt="Category Image"
                       />
                     </td>

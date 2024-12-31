@@ -1,3 +1,5 @@
+import { Product } from "../slices/productSlice";
+
 export const generateSlug = (name: string): string => {
   return name
     .toLowerCase()
@@ -7,4 +9,20 @@ export const generateSlug = (name: string): string => {
     .replace(/-+/g, "-"); // Remove duplicate hyphens
 };
 
-export const IMAGE_BASE_URL = import.meta.env.VITE_IMAGE_BASEURL; 
+export const IMAGE_BASE_URL = import.meta.env.VITE_IMAGE_BASEURL;
+
+export const getImageUrl = (url: string) => {
+  if (url.startsWith("uploads")) {
+    return `${IMAGE_BASE_URL}${url}`;
+  } else {
+    return url;
+  }
+};
+
+export const getPrice = (product: Product) => {
+  if (product.discountPercentage !== 0) {
+    return product.discountPrice;
+  } else {
+    return product.price;
+  }
+};

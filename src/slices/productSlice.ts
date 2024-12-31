@@ -43,7 +43,6 @@ const initialState: ProductState = {
   error: null,
 };
 
-
 // Fetch All Products
 export const fetchProducts = createAsyncThunk<
   Product[],
@@ -61,11 +60,11 @@ export const fetchProducts = createAsyncThunk<
 });
 
 // Fetch Product by ID
-export const fetchProductById = createAsyncThunk<
+export const fetchProductBySlug = createAsyncThunk<
   Product,
   string,
   { rejectValue: string }
->("products/fetchProductById", async (productId, { rejectWithValue }) => {
+>("products/fetchProductBySlug", async (productId, { rejectWithValue }) => {
   try {
     const response = await axios.get(`/products/${productId}`);
     return response.data;
@@ -152,18 +151,18 @@ const productSlice = createSlice({
       })
 
       // Fetch Product by ID
-      .addCase(fetchProductById.pending, (state) => {
+      .addCase(fetchProductBySlug.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
       .addCase(
-        fetchProductById.fulfilled,
+        fetchProductBySlug.fulfilled,
         (state, action: PayloadAction<Product>) => {
           state.loading = false;
           state.productDetails = action.payload;
         }
       )
-      .addCase(fetchProductById.rejected, (state, action) => {
+      .addCase(fetchProductBySlug.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload || "Failed to fetch product details";
       })

@@ -17,6 +17,8 @@ const ProductListPage = React.lazy(() => import("./pages/ProductListPage"));
 const ProductGridPage = React.lazy(() => import("./pages/ProductGridPage"));
 const ProductDetailPage = React.lazy(() => import("./pages/ProductDetailPage"));
 const CouponsPage = React.lazy(() => import("./pages/CouponsPage"));
+const OrdersPage = React.lazy(() => import("./pages/OrdersPage"));
+const OrderDetailPage = React.lazy(() => import("./pages/OrderDetailPage"));
 
 function App() {
   const dispatch: AppDispatch = useDispatch();
@@ -66,8 +68,10 @@ function App() {
           <Route path="/product-form/:id" element={<ProductFormPage />} />
           <Route path="/product-list" element={<ProductListPage />} />
           <Route path="/product-grid" element={<ProductGridPage />} />
-          <Route path="/product-detail/:id" element={<ProductDetailPage />} />
+          <Route path="/product-detail/:slug" element={<ProductDetailPage />} />
           <Route path="/coupons" element={<CouponsPage />} />
+          <Route path="/orders" element={<OrdersPage />} />
+          <Route path="/order/:id" element={<OrderDetailPage />} />
         </Routes>
       </Suspense>{" "}
     </div>

@@ -8,8 +8,6 @@ import {
 import Loader from "../common/Loader";
 import toast from "react-hot-toast";
 import NoDataFound from "../common/NoDataFound";
-import { IMAGE_BASE_URL } from "../../constants";
-import NoImageFound from "../../assets/img/not-image.png";
 import { AnimatePresence } from "framer-motion"; // Import Framer Motion
 import CouponInfoModel from "./CouponInfoModel";
 import Modal from "../common/Modal";

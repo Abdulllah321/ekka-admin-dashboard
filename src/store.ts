@@ -8,6 +8,7 @@ import {
 import productReducer from "./slices/productSlice";
 import bannersReducer from "./slices/bannerSlice";
 import couponsReducer from "./slices/couponSlice";
+import orderReducer from "./slices/orderSlice";
 
 export const store = configureStore({
   reducer: {
@@ -17,6 +18,7 @@ export const store = configureStore({
     products: productReducer,
     banners: bannersReducer,
     coupons: couponsReducer,
+    orders: orderReducer,
   },
 });
 

@@ -5,7 +5,7 @@ import ThumbnailImage from "../assets/img/products/vender-upload-preview.jpg";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import {
   createProduct,
-  fetchProductById,
+  fetchProductBySlug,
   Product,
   updateProduct,
 } from "../slices/productSlice";
@@ -16,8 +16,8 @@ import { fetchMainCategories } from "../slices/categorySlice";
 import DynamicColorPicker from "../components/products/DynamicColorPicker";
 import DynamicImageUpload from "../components/products/DynamicImageUpload";
 import toast from "react-hot-toast";
-import { IMAGE_BASE_URL } from "../constants";
 import SubmitBtn from "../components/common/SubmitBtn";
+import { getImageUrl } from "../constants";
 
 const ProductFormPage = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -44,7 +44,7 @@ const ProductFormPage = () => {
   const { mainCategories: categories } = useSelector(
     (state: RootState) => state.categories
   );
-  const { loading, error, productDetails } = useSelector(
+  const { loading, productDetails } = useSelector(
     (state: RootState) => state.products
   );
   const { id } = useParams();
@@ -52,7 +52,7 @@ const ProductFormPage = () => {
   useEffect(() => {
     if (id) {
       setIsEdit(true);
-      dispatch(fetchProductById(id));
+      dispatch(fetchProductBySlug(id));
     }
   }, [id]);
 
@@ -71,21 +71,10 @@ const ProductFormPage = () => {
   ) => {
     const { name, value } = e.target;
 
-    // Handle conversion from comma-separated string to an array of tags
-    if (name === "productTags") {
-      setFormData((prev) => ({
-        ...prev,
-        [name]: value
-          .split(",")
-          .map((tag) => tag.trim())
-          .filter((tag) => tag !== ""),
-      }));
-    } else {
-      setFormData((prev) => ({
-        ...prev,
-        [name]: value,
-      }));
-    }
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
 
     if (errors[name]) {
       toast.error(`Failed to update ${name}`);
@@ -244,7 +233,7 @@ const ProductFormPage = () => {
                               className="ec-image-preview"
                               src={
                                 formData.thumbnail
-                                  ? IMAGE_BASE_URL + formData.thumbnail
+                                  ? getImageUrl(formData.thumbnail)
                                   : ThumbnailImage
                               }
                               alt="edit"
@@ -429,7 +418,7 @@ const ProductFormPage = () => {
                           placeholder=""
                           onChange={handleChange}
                           data-role="tagsinput"
-                          value={formData?.productTags?.join(", ") || ""} // Join array into a string for display
+                          value={formData?.productTags}
                         />
                       </div>
 

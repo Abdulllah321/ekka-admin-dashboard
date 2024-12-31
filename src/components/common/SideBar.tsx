@@ -47,18 +47,12 @@ const Sidebar = ({ isSidebarVisible }: { isSidebarVisible: boolean }) => {
         { label: "Add Product", path: "/product-form" },
         { label: "List Product", path: "/product-list" },
         { label: "Grid Product", path: "/product-grid" },
-        { label: "Product Detail", path: "/product-detail" },
       ],
     },
     {
       label: "Orders",
       icon: "mdi mdi-cart",
-      subMenu: [
-        { label: "New Order", path: "/new-order" },
-        { label: "Order History", path: "/order-history" },
-        { label: "Order Detail", path: "/order-detail" },
-        { label: "Invoice", path: "/invoice" },
-      ],
+      path: "/orders",
     },
     {
       label: "Reviews",
@@ -67,7 +61,7 @@ const Sidebar = ({ isSidebarVisible }: { isSidebarVisible: boolean }) => {
     },
     {
       label: "Banners",
-      icon: "mdi mdi-billboard", 
+      icon: "mdi mdi-billboard",
       path: "/banners",
     },
     {

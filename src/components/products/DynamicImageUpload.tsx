@@ -3,7 +3,7 @@ import { Dispatch, SetStateAction } from "react";
 import { FaPlus, FaTrashAlt } from "react-icons/fa"; // Add icons from react-icons
 import { Product } from "../../slices/productSlice";
 import Images from "../../assets/img/products/vender-upload-thumb-preview.jpg";
-import { IMAGE_BASE_URL } from "../../constants";
+import { getImageUrl } from "../../constants";
 
 const DynamicImageUpload = ({
   imageUrls,
@@ -62,7 +62,7 @@ const DynamicImageUpload = ({
             <div className="image-thumb-preview">
               <img
                 className="image-thumb-preview ec-image-preview"
-                src={IMAGE_BASE_URL + imageUrl || Images}
+                src={getImageUrl(imageUrl!) || Images}
                 alt="edit"
                 style={{ width: "100px", height: "100px", objectFit: "cover" }}
               />
