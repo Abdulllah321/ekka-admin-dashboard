@@ -14,7 +14,7 @@ import "swiper/css/navigation";
 import ProductImageSliders from "../components/products/ProductImageSliders.js";
 
 const ProductDetailPage = () => {
-  const { id: slug } = useParams();
+  const { slug } = useParams();
   const dispatch: AppDispatch = useDispatch();
 
   const { productDetails, loading, error } = useSelector(

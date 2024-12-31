@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Swiper as SwiperInstance } from "swiper";
-import ReactImageMagnify from "react-image-magnify";
 import { Navigation } from "swiper/modules";
 import { getImageUrl } from "../../constants";
 
@@ -46,47 +45,24 @@ const ProductImageSliders: React.FC<ProductImageSlidersProps> = ({
         className="single-product-cover"
         loop
         onSlideChange={handleSlideChange} // Sync active index
-        onSwiper={setSwiperInstance} // Store swiper instance
+        onSwiper={setSwiperInstance}
       >
         <SwiperSlide className="single-slide">
-          <ReactImageMagnify
-            {...{
-              smallImage: {
-                alt: productDetails.name,
-                isFluidWidth: true,
-                src: getImageUrl(productDetails?.thumbnail!),
-              },
-              largeImage: {
-                src: getImageUrl(productDetails?.thumbnail!),
-                width: 1200,
-                height: 1800,
-              },
-              enlargedImageStyle: {
-                background: "white",
-              },
-              enlargedImagePosition: "over",
-              shouldUsePositiveSpaceLens: true,
+          <img
+            src={getImageUrl(productDetails?.thumbnail!)}
+            alt={productDetails.name}
+            style={{
+              width: "100%",
             }}
           />
         </SwiperSlide>
         {productDetails.imageUrls.map((img, index) => (
           <SwiperSlide key={index} className="single-slide">
-            <ReactImageMagnify
-              {...{
-                smallImage: {
-                  alt: productDetails.name,
-                  isFluidWidth: true,
-                  src: getImageUrl(img),
-                },
-                largeImage: {
-                  src: getImageUrl(img),
-                  width: 1200,
-                  height: 1800,
-                },
-                enlargedImageContainerDimensions: {
-                  width: "150%",
-                  height: "100%",
-                },
+            <img
+              src={getImageUrl(img!)}
+              alt={productDetails.name}
+              style={{
+                width: "100%",
               }}
             />
           </SwiperSlide>
@@ -128,14 +104,16 @@ const ProductImageSliders: React.FC<ProductImageSlidersProps> = ({
                   : "3px solid transparent",
               transition: ".5s all",
             }}
-            src={getImageUrl( productDetails?.thumbnail!)}
+            src={getImageUrl(productDetails?.thumbnail!)}
             alt={productDetails.name}
           />
         </SwiperSlide>
         {productDetails.imageUrls.map((img, index) => (
           <SwiperSlide
             key={index}
-            className={`single-slide ${activeIndex === index + 1 ? "active" : ""}`}
+            className={`single-slide ${
+              activeIndex === index + 1 ? "active" : ""
+            }`}
             style={{
               width: "93px",
               height: "93px",
