@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect } from "react";
 import Layout from "../components/common/Layout";
 import { Link, useParams } from "react-router-dom";
 import { AppDispatch, RootState } from "../store";

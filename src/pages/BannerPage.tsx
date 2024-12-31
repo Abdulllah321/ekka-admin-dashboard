@@ -21,7 +21,7 @@ import { getImageUrl } from "../constants";
 
 const BannerPage = () => {
   const dispatch: AppDispatch = useDispatch();
-  const { banners, loading, error } = useSelector(
+  const { banners, loading } = useSelector(
     (state: RootState) => state.banners
   );
   const [isForm, setIsForm] = useState<boolean | string>(false);
@@ -239,9 +239,10 @@ const BannerPage = () => {
                 }
                 setIsForm(false);
               } else {
-                Object.entries(errors).forEach(([key, value]) =>
-                  toast.error(value)
-                );
+                Object.entries(errors).forEach(([key, value]) => {
+                  console.log(key, value);
+                  toast.error(value);
+                });
               }
             }}
           >

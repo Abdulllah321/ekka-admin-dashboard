@@ -23,7 +23,6 @@ type Props = {
 
 const CouponInfoModel = ({ selectedCoupon, closeModal }: Props) => {
   const {
-    id,
     code,
     description,
     discountAmount,
@@ -31,8 +30,7 @@ const CouponInfoModel = ({ selectedCoupon, closeModal }: Props) => {
     startDate,
     endDate,
     status,
-    createdAt,
-    updatedAt,
+
     imageUrl,
   } = selectedCoupon;
 
@@ -71,11 +69,7 @@ const CouponInfoModel = ({ selectedCoupon, closeModal }: Props) => {
             <div className="row">
               {imageUrl && (
                 <div className="col-md-4">
-                  <img
-                    src={imageUrl}
-                    alt={code}
-                    className="img-fluid"
-                  />
+                  <img src={imageUrl} alt={code} className="img-fluid" />
                 </div>
               )}
               <div className="col-md-8">
@@ -105,8 +99,8 @@ const CouponInfoModel = ({ selectedCoupon, closeModal }: Props) => {
                         status === "active"
                           ? "bg-success"
                           : status === "inactive"
-                          ? "bg-warning"
-                          : "bg-danger"
+                            ? "bg-warning"
+                            : "bg-danger"
                       }`}
                     >
                       {status.toUpperCase()}

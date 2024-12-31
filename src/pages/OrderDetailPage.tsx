@@ -14,13 +14,7 @@ const OrderDetailPage = () => {
   const { currentOrder, loading } = useSelector(
     (state: RootState) => state.orders
   );
-  const orderSteps = [
-    OrderStatus.pending,
-    OrderStatus.processing,
-    "Out for Delivery",
-    OrderStatus.shipped,
-    OrderStatus.delivered,
-  ];
+
 
   useEffect(() => {
     dispatch(getOrderById(id));
