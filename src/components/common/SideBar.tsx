@@ -7,7 +7,6 @@ const Sidebar = ({ isSidebarVisible }: { isSidebarVisible: boolean }) => {
   const location = useLocation();
   const [isHovered, setIsHovered] = useState<boolean>();
 
-  // Define the menu structure as an array of objects
   const menuItems = [
     {
       label: "Dashboard",
@@ -15,22 +14,14 @@ const Sidebar = ({ isSidebarVisible }: { isSidebarVisible: boolean }) => {
       path: "/",
     },
     {
-      label: "Vendors",
+      label: "Vendors / Store",
       icon: "mdi mdi-account-group-outline",
-      subMenu: [
-        { label: "Vendor Grid", path: "/vendor-card" },
-        { label: "Vendor List", path: "/vendor-list" },
-        { label: "Vendors Profile", path: "/vendor-profile" },
-      ],
+      path: "/vendors",
     },
     {
       label: "Users",
       icon: "mdi mdi-account-group",
-      subMenu: [
-        { label: "User Grid", path: "/user-card" },
-        { label: "User List", path: "/user-list" },
-        { label: "Users Profile", path: "/user-profile" },
-      ],
+      path: "/users",
     },
     {
       label: "Categories",
@@ -64,11 +55,7 @@ const Sidebar = ({ isSidebarVisible }: { isSidebarVisible: boolean }) => {
       icon: "mdi mdi-billboard",
       path: "/banners",
     },
-    {
-      label: "Brands",
-      icon: "mdi mdi-tag-faces",
-      path: "/brand-list",
-    },
+
     {
       label: "Coupons",
       icon: "mdi mdi-ticket-percent",
@@ -115,8 +102,7 @@ const Sidebar = ({ isSidebarVisible }: { isSidebarVisible: boolean }) => {
                     item.subMenu &&
                     item.subMenu.some((sub) => isActive(sub.path))
                       ? "active"
-                      : //@ts-ignore
-                        isActive(item.path)
+                      : isActive(item.path!)
                   }`}
                 >
                   <Link

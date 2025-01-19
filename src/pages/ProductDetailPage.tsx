@@ -1,4 +1,4 @@
-import  { useEffect } from "react";
+import { useEffect } from "react";
 import Layout from "../components/common/Layout";
 import { Link, useParams } from "react-router-dom";
 import { AppDispatch, RootState } from "../store";
@@ -12,6 +12,7 @@ import "../assets/plugins/jquery-zoom/jquery.zoom.min.js";
 import "swiper/css";
 import "swiper/css/navigation";
 import ProductImageSliders from "../components/products/ProductImageSliders.js";
+import { getImageUrl } from "../constants/index.js";
 
 const ProductDetailPage = () => {
   const { slug } = useParams();
@@ -157,46 +158,59 @@ const ProductDetailPage = () => {
                     </div>
                   </div>
                 </div>
-                <div className="col-xl-3 col-lg-12 u-card">
-                  <div className="card card-default seller-card">
-                    <div className="card-body text-center">
-                      <a
-                        href="javascript:0"
-                        className="text-secondary d-inline-block"
-                      >
-                        <div className="image mb-3">
-                          <img
-                            src="assets/img/user/u-xl-4.jpg"
-                            className="img-fluid rounded-circle"
-                            alt="Avatar Image"
-                          />
-                        </div>
-                        <h5 className="text-dark">John Karter</h5>
-                        <p className="product-rate">
-                          <i className="mdi mdi-star is-rated" />
-                          <i className="mdi mdi-star is-rated" />
-                          <i className="mdi mdi-star is-rated" />
-                          <i className="mdi mdi-star is-rated" />
-                          <i className="mdi mdi-star" />
-                        </p>
-                        <ul className="list-unstyled">
-                          <li className="d-flex mb-1">
-                            <i className="mdi mdi-map mr-1" />
-                            <span>321/2, rio street, usa.</span>
-                          </li>
-                          <li className="d-flex mb-1">
-                            <i className="mdi mdi-email mr-1" />
-                            <span>example@email.com</span>
-                          </li>
-                          <li className="d-flex">
-                            <i className="mdi mdi-whatsapp mr-1" />
-                            <span>+00 987-654-3210</span>
-                          </li>
-                        </ul>
-                      </a>
+                {productDetails.store && (
+                  <div className="col-xl-3 col-lg-12 u-card">
+                    <div className="card card-default seller-card">
+                      <div className="card-body text-center">
+                        <a
+                          href="javascript:0"
+                          className="text-secondary d-inline-block"
+                        >
+                          <div className="image mb-3">
+                            <img
+                              src={getImageUrl(
+                                productDetails.store?.logo || "default-logo.jpg"
+                              )} // Fallback for missing logo
+                              className="img-fluid rounded-circle"
+                              alt={`${productDetails.store?.name}'s Logo`}
+                            />
+                          </div>
+                          <h5 className="text-dark">
+                            {productDetails.store?.name}
+                          </h5>
+                          <p className="product-rate">
+                            {[...Array(5)].map((_, index) => (
+                              <i
+                                key={index}
+                                className={`mdi mdi-star ${index < (productDetails.store?.rating || 0) ? "is-rated" : ""}`}
+                              />
+                            ))}
+                          </p>
+                          <ul className="list-unstyled">
+                            {productDetails.store?.address && (
+                              <li className="d-flex mb-1">
+                                <i className="mdi mdi-map mr-1" />
+                                <span>{productDetails.store?.address}</span>
+                              </li>
+                            )}
+                            <li className="d-flex mb-1">
+                              <i className="mdi mdi-email mr-1" />
+                              <span>{productDetails.store?.contactEmail}</span>
+                            </li>
+                            {productDetails.store?.contactPhone && (
+                              <li className="d-flex">
+                                <i className="mdi mdi-whatsapp mr-1" />
+                                <span>
+                                  {productDetails.store?.contactPhone}
+                                </span>
+                              </li>
+                            )}
+                          </ul>
+                        </a>
+                      </div>
                     </div>
                   </div>
-                </div>
+                )}
               </div>
               <div className="row review-rating mt-4">
                 <div className="col-12">
@@ -274,52 +288,60 @@ const ProductDetailPage = () => {
                       role="tabpanel"
                     >
                       <div className="ec-t-review-wrapper">
-                        <div className="ec-t-review-item">
-                          <div className="ec-t-review-avtar">
-                            <img src="assets/img/review-image/1.jpg" alt="" />
-                          </div>
-                          <div className="ec-t-review-content">
-                            <div className="ec-t-review-top">
-                              <p className="ec-t-review-name">Jeny Doe</p>
-                              <div className="ec-t-rate">
-                                <i className="mdi mdi-star is-rated" />
-                                <i className="mdi mdi-star is-rated" />
-                                <i className="mdi mdi-star is-rated" />
-                                <i className="mdi mdi-star is-rated" />
-                                <i className="mdi mdi-star" />
+                        {productDetails?.reviews &&
+                        productDetails.reviews.length > 0 ? (
+                          productDetails.reviews.map((review) => (
+                            <div className="ec-t-review-item" key={review.id}>
+                              <div className="ec-t-review-avtar">
+                                <img
+                                  src={getImageUrl(
+                                    review.user?.profileImage ||
+                                      "default-avatar.jpg"
+                                  )} // Fallback for missing profile image
+                                  alt={`${review.user?.firstName || "User"}'s Avatar`}
+                                />
+                              </div>
+                              <div className="ec-t-review-content">
+                                <div className="ec-t-review-top">
+                                  <p className="ec-t-review-name">
+                                    {review.user
+                                      ? `${review.user.firstName || ""} ${review.user.lastName || ""}`
+                                      : "Anonymous"}
+                                  </p>
+                                  <div className="ec-t-rate">
+                                    {[...Array(5)].map((_, index) => (
+                                      <i
+                                        key={index}
+                                        className={`mdi mdi-star ${
+                                          index < (review.rating || 0)
+                                            ? "is-rated"
+                                            : ""
+                                        }`}
+                                      />
+                                    ))}
+                                  </div>
+                                </div>
+                                <div className="ec-t-review-bottom">
+                                  <p>
+                                    {review.comment || "No comment provided."}
+                                  </p>
+                                  {review.createdAt && (
+                                    <small className="text-muted">
+                                      Reviewed on:{" "}
+                                      {new Date(
+                                        review.createdAt
+                                      ).toLocaleDateString()}
+                                    </small>
+                                  )}
+                                </div>
                               </div>
                             </div>
-                            <div className="ec-t-review-bottom">
-                              <p>
-                                Lorem Ipsum is simply dummy text of the printing
-                                and typesetting industry.
-                              </p>
-                            </div>
+                          ))
+                        ) : (
+                          <div className="text-center text-muted mt-3">
+                            <p>No reviews available for this product yet.</p>
                           </div>
-                        </div>
-                        <div className="ec-t-review-item">
-                          <div className="ec-t-review-avtar">
-                            <img src="assets/img/review-image/2.jpg" alt="" />
-                          </div>
-                          <div className="ec-t-review-content">
-                            <div className="ec-t-review-top">
-                              <p className="ec-t-review-name">Linda Morgus</p>
-                              <div className="ec-t-rate">
-                                <i className="mdi mdi-star is-rated" />
-                                <i className="mdi mdi-star is-rated" />
-                                <i className="mdi mdi-star is-rated" />
-                                <i className="mdi mdi-star is-rated" />
-                                <i className="mdi mdi-star" />
-                              </div>
-                            </div>
-                            <div className="ec-t-review-bottom">
-                              <p>
-                                Lorem Ipsum is simply dummy text of the printing
-                                and typesetting industry.
-                              </p>
-                            </div>
-                          </div>
-                        </div>
+                        )}
                       </div>
                     </div>
                   </div>

@@ -96,6 +96,7 @@ const ProductListPage = () => {
                       <th>Purchased</th>
                       <th>Stock</th>
                       <th>Status</th>
+                      <th>user</th>
                       <th>Date</th>
                       <th>Action</th>
                     </tr>
@@ -120,6 +121,7 @@ const ProductListPage = () => {
                         <td>{product?.soldQuantity}</td>
                         <td>{product.stockQuantity}</td>
                         <td>{product.status.toUpperCase()}</td>
+                        <td>{product.userId ?  product.userId : "admin"}</td>
                         <td>
                           {product.createdAt &&
                             new Date(product.createdAt).toLocaleString()}

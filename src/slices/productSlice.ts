@@ -1,32 +1,8 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
+import { Product } from "../utils/types";
 
-// Define Product Type
-export interface Product {
-  id?: string;
-  name: string;
-  description: string;
-  shortDesc?: string;
-  price: number;
-  discountPrice?: number;
-  stockQuantity: number;
-  sizes: string[];
-  colors: string[];
-  imageUrls: string[];
-  status: string;
-  createdAt?: Date | string;
-  updatedAt?: Date | string;
-  stockStatus?: "inStock" | "outOfStock" | "limitedStock";
-  mainCategoryId: string;
-  subCategoryId: string;
-  thumbnail: string;
-  slug: string;
-  weight?: string;
-  dimensions?: string;
-  productTags?: string[];
-  soldQuantity?: number | 0;
-  discountPercentage?: number;
-}
+
 
 // Define Slice State
 interface ProductState {
