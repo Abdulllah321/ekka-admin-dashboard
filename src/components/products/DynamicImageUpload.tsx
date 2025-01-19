@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Dispatch, SetStateAction } from "react";
 import { FaPlus, FaTrashAlt } from "react-icons/fa"; // Add icons from react-icons
-import { Product } from "../../slices/productSlice";
+import { Product } from "../../utils/types";
 import Images from "../../assets/img/products/vender-upload-thumb-preview.jpg";
 import { getImageUrl } from "../../constants";
 

@@ -16,10 +16,6 @@ const List = () => {
     fetchVendors();
   }, []);
 
-  const handleViewDetails = (vendor: Store) => {
-    setSelectedVendor(vendor);
-  };
-
   return (
     <Layout>
       <div className="ec-content-wrapper ec-vendor-wrapper">

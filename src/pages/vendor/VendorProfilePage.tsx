@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import  { useEffect } from "react";
 import Layout from "../../components/common/Layout";
 import { Link, useParams } from "react-router";
-import { store, useAppDispatch, useAppSelector } from "../../store";
+import {  useAppDispatch, useAppSelector } from "../../store";
 import { fetchStoreById } from "../../slices/storeSlice";
 import { getImageUrl } from "../../constants";
 import Loader from "../../components/common/Loader";

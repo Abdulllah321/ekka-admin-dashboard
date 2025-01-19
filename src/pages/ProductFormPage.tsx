@@ -6,7 +6,6 @@ import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import {
   createProduct,
   fetchProductBySlug,
-  Product,
   updateProduct,
 } from "../slices/productSlice";
 import axios from "axios";
@@ -18,6 +17,7 @@ import DynamicImageUpload from "../components/products/DynamicImageUpload";
 import toast from "react-hot-toast";
 import SubmitBtn from "../components/common/SubmitBtn";
 import { getImageUrl } from "../constants";
+import { Product } from "../utils/types";
 
 const ProductFormPage = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -37,6 +37,7 @@ const ProductFormPage = () => {
     thumbnail: "",
     slug: "",
     discountPercentage: 0,
+    rating: 0,
   });
 
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
@@ -159,6 +160,7 @@ const ProductFormPage = () => {
             thumbnail: "",
             slug: "",
             discountPercentage: 0,
+            rating: 0,
           });
         }
       } else {

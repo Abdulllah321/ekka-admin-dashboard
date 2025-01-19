@@ -1,6 +1,6 @@
 import { createSlice,  createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { Product } from "./productSlice";
+import { Product } from "../utils/types";
 
 // Enum for Discount Type
 export enum DiscountType {

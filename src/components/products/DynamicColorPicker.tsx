@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import { Product } from "../../slices/productSlice";
+import { Product } from "../../utils/types";
 
 const DynamicColorPicker = ({
   colors,
