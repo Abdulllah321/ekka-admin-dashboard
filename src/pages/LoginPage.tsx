@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Logo from "../assets/img/logo/logo-login.png";
 import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap CSS
 import "../assets/css/ekka.css"; // Import your custom CSS (ensure the file is in the correct path)
 import { loginUser } from "../slices/authSlice";
