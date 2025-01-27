@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import Layout from "../components/common/Layout";
 import CouponDetails from "../components/coupon/CouponDetails";
 import CouponForm from "../components/coupon/CouponForm";
@@ -9,7 +10,7 @@ const CouponsPage = () => {
                 <h1>Coupons</h1>
                 <p className="breadcrumbs">
                     <span>
-                        <a href="index.html">Home</a>
+                        <Link to={`/`}>Home</Link>
                     </span>
                     <span>
                         <i className="mdi mdi-chevron-right"></i>

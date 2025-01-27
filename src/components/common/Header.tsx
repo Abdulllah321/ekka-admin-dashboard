@@ -37,13 +37,13 @@ const Header = ({ toggleSidebar }: { toggleSidebar: () => void }) => {
           <ul className="nav navbar-nav">
             <li className="dropdown user-menu mr-3">
               <button
-                className="dropdown-toggle nav-link ec-drop"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
+                className="ec-drop"
+                // data-bs-toggle="dropdown"
+                // aria-expanded="false"
               >
                 <img src={UserImage} className="user-image" alt="User Image" />
               </button>
-              <ul className="dropdown-menu dropdown-menu-right ec-dropdown-menu">
+              {/* <ul className="dropdown-menu dropdown-menu-right ec-dropdown-menu">
                 <li className="dropdown-header">
                   <img
                     src={UserImage}
@@ -83,7 +83,7 @@ const Header = ({ toggleSidebar }: { toggleSidebar: () => void }) => {
                     <i className="mdi mdi-logout"></i> Log Out{" "}
                   </a>
                 </li>
-              </ul>
+              </ul> */}
             </li>
           </ul>
         </div>

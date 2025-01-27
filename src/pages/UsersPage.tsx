@@ -5,6 +5,7 @@ import axios from "axios";
 import { getImageUrl } from "../constants";
 import ImageUpload from "../components/common/ImageUpload";
 import DataTable from "../constants/dataTablesUtils";
+import { Link } from "react-router";
 
 const UsersPage = () => {
   const [users, setUsers] = useState<User[]>([]);
@@ -62,7 +63,7 @@ const UsersPage = () => {
             <h1>User List</h1>
             <p className="breadcrumbs">
               <span>
-                <a href="index.html">Home</a>
+                <Link to={`/`}>Home</Link>
               </span>
               <span>
                 <i className="mdi mdi-chevron-right" />

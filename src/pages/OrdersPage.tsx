@@ -43,7 +43,7 @@ const OrdersPage = () => {
         <h1>Orders</h1>
         <p className="breadcrumbs">
           <span>
-            <a href="index.html">Home</a>
+            <Link to={`/`}>Home</Link>
           </span>
           <span>
             <i className="mdi mdi-chevron-right" />

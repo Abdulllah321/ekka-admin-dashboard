@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
-import Logo from "../../assets/img/logo/ec-site-logo.png";
 
 const Sidebar = ({ isSidebarVisible }: { isSidebarVisible: boolean }) => {
   const location = useLocation();
@@ -86,9 +85,13 @@ const Sidebar = ({ isSidebarVisible }: { isSidebarVisible: boolean }) => {
       <div className="ec-left-sidebar ec-bg-sidebar">
         <div id="sidebar" className="sidebar ec-sidebar-footer">
           <div className="ec-brand">
-            <Link to="/" title="Ekka">
-              <img className="ec-brand-icon" src={Logo} alt="Ekka" />
-              <span className="ec-brand-name text-truncate">Ekka</span>
+            <Link to="/" title="Vastrafit">
+              <img
+                className="ec-brand-icon"
+                src={"/assets/img/logo/ec-site-logo.png"}
+                alt="Vastrafit"
+              />
+              <span className="ec-brand-name text-truncate">Vastrafit</span>
             </Link>
           </div>
 

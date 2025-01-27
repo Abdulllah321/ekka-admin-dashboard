@@ -5,7 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap CSS
 import "../assets/css/ekka.css"; // Import your custom CSS (ensure the file is in the correct path)
 import { loginUser } from "../slices/authSlice";
 import { AppDispatch } from "../store";
-import { Navigate, useNavigate } from "react-router";
+import { Link, Navigate, useNavigate } from "react-router";
 
 // Define the types for the Redux state
 interface RootState {
@@ -44,9 +44,13 @@ const LoginPage: React.FC = () => {
             <div className="card">
               <div className="card-header bg-primary">
                 <div className="ec-brand">
-                  <a href="index.html" title="Ekka">
-                    <img className="ec-brand-icon" src={Logo} alt="Ekka Logo" />
-                  </a>
+                  <Link to="/" title="Vastrafit">
+                    <img
+                      className="ec-brand-icon"
+                      src={"/assets/img/logo/ec-site-logo.png"}
+                      alt="Vastrafit Logo"
+                    />
+                  </Link>
                 </div>
               </div>
               <div className="card-body p-5">

@@ -21,9 +21,7 @@ import { getImageUrl } from "../constants";
 
 const BannerPage = () => {
   const dispatch: AppDispatch = useDispatch();
-  const { banners, loading } = useSelector(
-    (state: RootState) => state.banners
-  );
+  const { banners, loading } = useSelector((state: RootState) => state.banners);
   const [isForm, setIsForm] = useState<boolean | string>(false);
   const [formData, setFormData] = useState<Banner>({
     id: "",
@@ -107,7 +105,7 @@ const BannerPage = () => {
             <h1>Banner</h1>
             <p className="breadcrumbs">
               <span>
-                <a href="index.html">Home</a>
+                <Link to={`/`}>Home</Link>
               </span>
               <span>
                 <i className="mdi mdi-chevron-right" />

@@ -57,7 +57,7 @@ const ProductDetailPage = () => {
           <h1>Product Detail</h1>
           <p className="breadcrumbs">
             <span>
-              <a href="index.html">Home</a>
+              <Link to={`/`}>Home</Link>
             </span>
             <span>
               <i className="mdi mdi-chevron-right" />
@@ -113,12 +113,13 @@ const ProductDetailPage = () => {
                             <a href="#">T&amp;C</a>
                           </li>
                           <li>
-                            <b>Bank Offer :</b> 5% Unlimited Cashback on Ekka
-                            XYZ Bank Credit Card <a href="#">T&amp;C</a>
+                            <b>Bank Offer :</b> 5% Unlimited Cashback on
+                            Vastrafit XYZ Bank Credit Card{" "}
+                            <a href="#">T&amp;C</a>
                           </li>
                           <li>
-                            <b>Bank Offer :</b> Flat $50 off on first Ekka Pay
-                            Later order of $200 and above{" "}
+                            <b>Bank Offer :</b> Flat $50 off on first Vastrafit
+                            Pay Later order of $200 and above{" "}
                             <a href="#">T&amp;C</a>
                           </li>
                         </ul>

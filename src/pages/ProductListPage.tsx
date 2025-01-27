@@ -67,7 +67,7 @@ const ProductListPage = () => {
             <h1>Product</h1>
             <p className="breadcrumbs">
               <span>
-                <a href="index.html">Home</a>
+                <Link to={`/`}>Home</Link>
               </span>
               <span>
                 <i className="mdi mdi-chevron-right" />
@@ -121,7 +121,7 @@ const ProductListPage = () => {
                         <td>{product?.soldQuantity}</td>
                         <td>{product.stockQuantity}</td>
                         <td>{product.status.toUpperCase()}</td>
-                        <td>{product.userId ?  product.userId : "admin"}</td>
+                        <td>{product.userId ? product.userId : "admin"}</td>
                         <td>
                           {product.createdAt &&
                             new Date(product.createdAt).toLocaleString()}

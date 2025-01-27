@@ -3,6 +3,8 @@ import Layout from "../../components/common/Layout";
 import axios from "axios";
 import { Store } from "../../utils/types";
 import VendorCards from "../../components/Store/VendorCard";
+import { getImageUrl } from "../../constants";
+import { Link } from "react-router";
 
 const List = () => {
   const [vendors, setVendors] = useState<Store[]>([]);
@@ -25,7 +27,7 @@ const List = () => {
               <h1>Vendor Card</h1>
               <p className="breadcrumbs">
                 <span>
-                  <a href="index.html">Home</a>
+                  <Link to={`/`}>Home</Link>
                 </span>
                 <span>
                   <i className="mdi mdi-chevron-right" />
@@ -71,7 +73,7 @@ const List = () => {
                           <div className="text-center widget-profile px-0 border-0">
                             <div className="card-img mx-auto rounded-circle">
                               <img
-                                src={selectedVendor.logo}
+                                src={getImageUrl(selectedVendor.logo!)}
                                 alt={selectedVendor.name}
                               />
                             </div>

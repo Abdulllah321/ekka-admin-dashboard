@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from "../store";
 import { fetchAllReviews } from "../slices/reviewSlice";
 import { getImageUrl } from "../constants";
 import Loader from "../components/common/Loader";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 const ReviewsPage = () => {
   const dispatch = useAppDispatch();
@@ -42,7 +42,7 @@ const ReviewsPage = () => {
           <h1>Reviews</h1>
           <p className="breadcrumbs">
             <span>
-              <a href="index.html">Home</a>
+              <Link to={`/`}>Home</Link>
             </span>
             <span>
               <i className="mdi mdi-chevron-right" />

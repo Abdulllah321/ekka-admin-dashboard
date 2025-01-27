@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import CategoryDetails from "../components/category/CategoryDetails";
 import CategoryForm from "../components/category/CategoryForm";
 import Layout from "../components/common/Layout";
@@ -9,7 +10,7 @@ const CategoryPage = () => {
         <h1>Main Category</h1>
         <p className="breadcrumbs">
           <span>
-            <a href="index.html">Home</a>
+            <Link to="/">Home</Link>
           </span>
           <span>
             <i className="mdi mdi-chevron-right"></i>

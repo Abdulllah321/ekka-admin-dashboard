@@ -41,7 +41,7 @@ const VendorProfilePage = () => {
             <h1>Vendor Profile</h1>
             <p className="breadcrumbs">
               <span>
-                <a href="index.html">Home</a>
+                <Link to={`/`}>Home</Link>
               </span>
               <span>
                 <i className="mdi mdi-chevron-right" />
@@ -49,11 +49,11 @@ const VendorProfilePage = () => {
               Profile
             </p>
           </div>
-          <div>
+          {/* <div>
             <a href="vendor-list.html" className="btn btn-primary">
               Edit
             </a>
-          </div>
+          </div> */}
         </div>
         <div className="card bg-white profile-content ec-vendor-profile">
           <div className="row">

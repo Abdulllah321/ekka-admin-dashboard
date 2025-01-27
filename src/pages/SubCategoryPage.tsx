@@ -1,6 +1,7 @@
 import CategoryDetails from "../components/subcategory/SubCategoryDetails";
 import CategoryForm from "../components/subcategory/SubCategoryForm";
 import Layout from "../components/common/Layout";
+import { Link } from "react-router";
 
 const CategoryPage = () => {
   return (
@@ -9,7 +10,7 @@ const CategoryPage = () => {
         <h1>Sub Category</h1>
         <p className="breadcrumbs">
           <span>
-            <a href="index.html">Home</a>
+            <Link to={`/`}>Home</Link>
           </span>
           <span>
             <i className="mdi mdi-chevron-right"></i>

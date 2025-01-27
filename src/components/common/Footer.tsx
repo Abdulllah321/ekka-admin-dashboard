@@ -11,7 +11,7 @@ const Footer = () => {
             target="_blank"
           >
             {" "}
-            Ekka Admin Dashboard
+            Vastrafit Admin Dashboard
           </a>
           . All Rights Reserved.
         </p>

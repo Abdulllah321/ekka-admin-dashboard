@@ -44,7 +44,7 @@ const OrderDetailPage = () => {
         <h1>Order Detail</h1>
         <p className="breadcrumbs">
           <span>
-            <a href="index.html">Home</a>
+            <Link to={`/`}>Home</Link>
           </span>
           <span>
             <i className="mdi mdi-chevron-right" />
