@@ -46,7 +46,7 @@ const LoginPage: React.FC = () => {
                   <Link to="/" title="Vastrafit">
                     <img
                       className="ec-brand-icon"
-                      src={"/assets/img/logo/ec-site-logo.png"}
+                      src={"/assets/img/logo/logo.png"}
                       alt="Vastrafit Logo"
                     />
                   </Link>
