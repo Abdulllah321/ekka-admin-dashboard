@@ -11,7 +11,9 @@ export const generateSlug = (name: string): string => {
 
 export const IMAGE_BASE_URL = import.meta.env.VITE_IMAGE_BASEURL;
 
-export const getImageUrl = (url: string) => {
+export const getImageUrl = (url: string | null | undefined) => {
+  if (!url) return ""; // Or return a placeholder image path
+
   if (url.startsWith("uploads")) {
     return `${IMAGE_BASE_URL}${url}`;
   } else {
